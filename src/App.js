@@ -14,7 +14,7 @@ const customSymbol = Symbol()
 
 //middleware
 app.use(cors())
-app.all(body_parser.urlencoded({ extended: true }))
+app.use(body_parser.urlencoded({ extended: true }))
 app.use(function (req, res, next) {
     req[customSymbol] = req.ip
     res[customSymbol] = 'bienvenido ' + req.hostname
