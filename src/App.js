@@ -2,6 +2,7 @@
 const express = require("express")
 const bytes = require("bytes")
 const cors = require("cors")
+const helmet = require("helmet")
 const body_parser = require("body-parser")
 const dotenv = require("dotenv")
 dotenv.config()
@@ -13,6 +14,7 @@ const user_route = require("./routes/user_route")
 const customSymbol = Symbol()
 
 //middleware
+app.use(helmet())
 app.use(cors())
 app.use(body_parser.urlencoded({ extended: true }))
 app.use(function (req, res, next) {
