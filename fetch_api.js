@@ -11,7 +11,7 @@ function delete_user() {
     })
 }
 const date_m = new Date(Date.now())
-const User = {
+const post_user = {
     nombre: 'alfonso',
     email: 'alf@alf',
     password: '123',
@@ -23,9 +23,9 @@ function create_user() {
         fetch('http://localhost:3000/user/post-user', {
             method: 'POST',
             headers: {
-                'Content-Type': "user/json",
+                'Content-Type': "application/json",
             },
-            body: JSON.stringify(User)
+            body: JSON.stringify(post_user)
         })
             .then((result) => result)
             .then((result) => resolve(result))
