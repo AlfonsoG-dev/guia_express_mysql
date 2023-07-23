@@ -18,11 +18,11 @@ function delete_user() {
     })
 }
 const post_user = {
-    nombre: 'test_post_fetch',
-    email: 'test@post_fetch',
+    nombre: 'test-1',
+    email: 'test@test-1',
     password: 'test_123',
     rol: 'test',
-    create_at: '23-10-11'
+    create_at: new Date()
 }
 function create_user() {
     return new Promise(function (resolve, reject) {
