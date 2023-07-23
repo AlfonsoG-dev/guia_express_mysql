@@ -39,7 +39,7 @@ class User {
         this.rol = nRol
     }
     set set_create_at(nCreate_at = Date) {
-        this.create_at = new Date()
+        this.create_at = nCreate_at
     }
 }
 
