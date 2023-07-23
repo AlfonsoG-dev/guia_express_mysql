@@ -1,8 +1,11 @@
+//dependencias
 const express = require('express')
-const query = require("../service/data_query")
+const UserController = require("../service/data_query")
 const User = require('../model/user_model')
 const user_route = express.Router()
 
+//instancias
+const query = new UserController()
 const read_all_symbol = Symbol("db_data")
 const get_id_symbol = Symbol("db_get_id")
 const get_name_symbol = Symbol("db_get_name")
