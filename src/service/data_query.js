@@ -7,7 +7,7 @@ const conn_db = mysql2.createConnection(connection_db)
 class UserController {
     read_all() {
         return new Promise((resolve, reject) => {
-            local.execute('select * from user', (err, res) => {
+            conn_db.execute('select * from user', (err, res) => {
                 if (err) reject(err)
                 resolve(res)
             })
