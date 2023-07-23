@@ -8,7 +8,7 @@ class UserController {
         this.connection = mysql2.createConnection(connection_db)
     }
     read_all() {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             this.connection.execute('select * from user', (err, res) => {
                 if (err) reject(err)
                 resolve(res)
