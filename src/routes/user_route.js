@@ -26,7 +26,7 @@ user_route.get("/", async function (req, res) {
 user_route.get("/:id", async function (req, res) {
     try {
         const user_id = parseInt(req.params.id)
-        const data_res = await query.get_user_id(user_id)
+        const data_res = await query.read_by_id(user_id)
         if (data_res) {
             res.status(201).json(data_res)
         } else {
@@ -41,7 +41,7 @@ user_route.get("/:id", async function (req, res) {
 user_route.get("/get-name/:name", async function (req, res) {
     try {
         const user_name = parseInt(req.params.name)
-        const data_res = await query.get_name(user_name)
+        const data_res = await query.read_by_name(user_name)
         if (data_res) {
             res.status(201).json(data_res)
         } else {
@@ -57,9 +57,9 @@ user_route.get("/get-name/:name", async function (req, res) {
 user_route.post("/post-user", async function (req, res) {
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
-        const consulta = await query.get_name(data_user.get_name)
+        const consulta = await query.read_by_name(data_user.get_name)
         if (consulta) {
-            const data_post = await query.post_user(data_user)
+            const data_post = await query.insert_user(data_user)
             res.status(201).json(data_post)
         } else {
             res.status(400).send(`el usuario con nombre ${data_user.get_name} ya existe`)

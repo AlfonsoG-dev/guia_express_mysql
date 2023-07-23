@@ -16,7 +16,7 @@ class UserController {
         })
     }
 
-    get_user_id(id = 0) {
+    read_by_id(id = 0) {
         return new Promise((resolvem, reject) => {
             this.connection.execute('select * from user where id = ?', [id], (err, res) => {
                 if (err) reject(err)
@@ -25,7 +25,7 @@ class UserController {
         })
     }
 
-    get_name(user_name = 0) {
+    read_by_name(user_name = 0) {
         return new Promise((resolve, reject) => {
             this.connection.execute('select * from user where nombre = ?', [user_name], function (err, res) {
                 if (err) reject(err)
@@ -35,7 +35,7 @@ class UserController {
 
     }
 
-    post_user(user = User) {
+    insert_user(user = User) {
         return new Promise((resolve, reject) => {
             this.connection.execute('insert into user (nombre, email, password, rol, create_at) values (?,?,?,?,?)', [user.get_name, user.get_email, user.get_password, user.get_rol, user.get_create_at], function (err, res) {
                 if (err) reject(err)
