@@ -1,6 +1,6 @@
 const mysql2 = require("mysql2")
 const connection_db = require("./data_base")
-
+const User = require("../model/user_model")
 const conn_db = mysql2.createConnection(connection_db)
 
 function read_all() {
@@ -29,9 +29,9 @@ function get_name(id = 0) {
     })
 
 }
-function post_user(user) {
+function post_user(user = User) {
     return new Promise(function (resolve, reject) {
-        conn_db.query('insert into user (nombre, email, password, rol, create_at) values (?,?,?,?,?)', [user.nombre, user.email, user.password, user.rol, user.create_at], function (err, res) {
+        conn_db.execute('insert into user (nombre, email, password, rol, create_at) values (?,?,?,?,?)', [user.get_name, user.get_email, user.get_password, user.get_rol, user.get_create_at], function (err, res) {
             if (err) reject(err)
             resolve(res)
         })

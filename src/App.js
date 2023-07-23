@@ -17,6 +17,7 @@ const customSymbol = Symbol()
 app.use(helmet())
 app.use(cors())
 app.use(body_parser.urlencoded({ extended: true }))
+app.use(body_parser.json({ inflate: true, limit: bytes(10000) }))
 app.use(function (req, res, next) {
     req[customSymbol] = req.ip
     res[customSymbol] = 'bienvenido ' + req.hostname

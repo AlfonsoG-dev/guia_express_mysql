@@ -1,4 +1,11 @@
-
+function get_user() {
+    return new Promise(function (resolve, reject) {
+        fetch('http://localhost:3000/user')
+            .then((response) => response.json())
+            .then((response) => resolve(response))
+            .catch((err) => reject(err))
+    })
+}
 
 function delete_user() {
 
@@ -10,13 +17,12 @@ function delete_user() {
             .catch((err) => reject(err))
     })
 }
-const date_m = new Date(Date.now())
 const post_user = {
-    nombre: 'alfonso',
-    email: 'alf@alf',
-    password: '123',
-    rol: 'admin',
-    create_at: date_m
+    nombre: 'test_post_fetch',
+    email: 'test@post_fetch',
+    password: 'test_123',
+    rol: 'test',
+    create_at: '23-10-11'
 }
 function create_user() {
     return new Promise(function (resolve, reject) {
