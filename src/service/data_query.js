@@ -24,15 +24,17 @@ class UserController {
             })
         })
     }
-    get_name(id = 0) {
+
+    get_name(user_name = 0) {
         return new Promise((resolve, reject) => {
-            this.connection.execute('select nombre from user where id = ?', [id], function (err, res) {
+            this.connection.execute('select * from user where nombre = ?', [user_name], function (err, res) {
                 if (err) reject(err)
                 resolve(res)
             })
         })
 
     }
+
     post_user(user = User) {
         return new Promise((resolve, reject) => {
             this.connection.execute('insert into user (nombre, email, password, rol, create_at) values (?,?,?,?,?)', [user.get_name, user.get_email, user.get_password, user.get_rol, user.get_create_at], function (err, res) {

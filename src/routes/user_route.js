@@ -11,7 +11,12 @@ const query = new UserController()
 user_route.get("/", async function (req, res) {
     try {
         const data_res = await query.read_all()
-        res.status(201).json(data_res)
+        if (data_res) {
+
+            res.status(201).json(data_res)
+        } else {
+            res.status(400).send("error no hay datos ")
+        }
     } catch (error) {
         res.end()
         throw new Error(error)
@@ -22,18 +27,26 @@ user_route.get("/:id", async function (req, res) {
     try {
         const user_id = parseInt(req.params.id)
         const data_res = await query.get_user_id(user_id)
-        res.json(data_res)
+        if (data_res) {
+            res.status(201).json(data_res)
+        } else {
+            res.status(400).send("error no encontrado")
+        }
     } catch (error) {
         res.end()
         throw new Error(error)
     }
 })
 
-user_route.get("/get-name/:id", async function (req, res) {
+user_route.get("/get-name/:name", async function (req, res) {
     try {
-        const user_id = parseInt(req.params.id)
-        const data_res = await query.get_name(user_id)
-        res.status(201).json(data_res)
+        const user_name = parseInt(req.params.name)
+        const data_res = await query.get_name(user_name)
+        if (data_res) {
+            res.status(201).json(data_res)
+        } else {
+            res.status(400).send("error no encontrado")
+        }
 
     } catch (err) {
         res.end()
@@ -44,8 +57,13 @@ user_route.get("/get-name/:id", async function (req, res) {
 user_route.post("/post-user", async function (req, res) {
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
-        const data_post = await query.post_user(data_user)
-        res.status(201).json(data_post)
+        const consulta = await query.get_name(data_user.get_name)
+        if (consulta) {
+            const data_post = await query.post_user(data_user)
+            res.status(201).json(data_post)
+        } else {
+            res.status(400).send(`el usuario con nombre ${data_user.get_name} ya existe`)
+        }
     } catch (error) {
         throw new Error(error)
     }
