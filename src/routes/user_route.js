@@ -7,6 +7,7 @@ const user_route = express.Router()
 
 //instancias 
 const query = new UserController()
+
 user_route.get("/", async function (req, res) {
     try {
         const data_res = await query.read_all()
@@ -42,13 +43,7 @@ user_route.get("/get-name/:id", async function (req, res) {
 
 user_route.post("/post-user", async function (req, res) {
     try {
-        const data_user = {
-            nombre: req.body.nombre,
-            email: req.body.email,
-            password: req.body.password,
-            rol: req.body.rol,
-            create_at: new Date()
-        }
+        const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
         const data_post = await query.post_user(data_user)
         res.status(201).json(data_post)
     } catch (error) {

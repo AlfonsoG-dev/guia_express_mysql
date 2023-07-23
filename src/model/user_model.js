@@ -1,10 +1,10 @@
 class User {
-    constructor(nombre = '', email = '', password = '', rol = '', create_at = new Date) {
+    constructor(nombre = '', email = '', password = '', rol = '') {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.rol = rol;
-        this.create_at = create_at;
+        this.create_at = new Date();
     }
 
     //getter
@@ -39,7 +39,7 @@ class User {
         this.rol = nRol
     }
     set set_create_at(nCreate_at = Date) {
-        this.create_at = nCreate_at
+        this.create_at = new Date()
     }
 }
 
