@@ -25,14 +25,22 @@ class UserController {
         })
     }
 
-    read_by_name(user_name = 0) {
+    read_by_name(user_name = '') {
         return new Promise((resolve, reject) => {
-            this.connection.execute('select * from user where nombre = ?', [user_name], function (err, res) {
+            this.connection.execute('select nombre, email, rol from user where nombre = ?', [user_name], function (err, res) {
                 if (err) reject(err)
                 resolve(res)
             })
         })
 
+    }
+    read_by_email(user_email = '') {
+        return new Promise((resolve, reject) => {
+            this.connection.execute('select nombre, email, rol from user where email = ?', [user_email], function (err, res) {
+                if (err) reject(err)
+                resolve(res)
+            })
+        })
     }
 
     insert_user(user = User) {

@@ -1,6 +1,7 @@
 //dependencias
 const express = require('express')
 const UserController = require("../service/data_query")
+const VerifiUserData = require("../middlewares/verifi_data")
 const User = require('../model/user_model')
 const user_route = express.Router()
 
@@ -58,13 +59,17 @@ user_route.post("/post-user", async function (req, res) {
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
         const consulta = await query.read_by_name(data_user.get_name)
-        if (consulta.length == 0) {
-            const data_post = await query.insert_user(data_user)
-            res.status(201).json(data_post)
-        } else {
-            res.status(400).send(`el usuario con nombre ${data_user.get_name} ya existe`)
-        }
-    } catch (error) {
+        const verifi = new VerifiUserData(data_user)
+        const nombre = await verifi.test_password()
+        console.log(nombre)
+        /*         if (consulta.length == 0) {
+                    const data_post = await query.insert_user(data_user)
+                    res.status(201).json(data_post)
+                } else {
+                    res.status(400).send(`el usuario con nombre ${data_user.get_name} ya existe`)
+                } */
+    }
+    catch (error) {
         throw new Error(error)
     }
 })
