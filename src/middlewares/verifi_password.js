@@ -2,24 +2,26 @@
 class VerifiPassword {
     constructor(nPassword = '') {
         this.password = nPassword
-        this.vocals = ['a', 'e', 'i', 'o', 'u']
+        this.letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         this.simbols = ['!', '@', '#', '$', '%', '&', '()', '+', '*', '{}', '[]', ';', ':', '-', '_']
     }
 
     get get_password() {
-        if (this.contains_vocal() === true &&
+        if (this.contains_letras() === true &&
             this.contains_simbol() === true &&
             this.contains_uper_leters() === true &&
-            this.contains_lower_leters() === true) {
+            this.contains_lower_leters() === true &&
+            this.password.length > 8) {
+
             return this.password
         }
 
     }
-    contains_vocal() {
+    contains_letras() {
         const pass = this.password
 
-        for (let i in this.vocals) {
-            if (pass.includes(this.vocals[i])) {
+        for (let i in this.letras) {
+            if (pass.includes(this.letras[i])) {
                 return true
             }
         }
@@ -37,8 +39,8 @@ class VerifiPassword {
     }
     contains_uper_leters() {
         const pass = this.password
-        for (let i in this.vocals) {
-            const upper = this.vocals[i].toUpperCase()
+        for (let i in this.letras) {
+            const upper = this.letras[i].toUpperCase()
             if (pass.includes(upper)) {
                 return true
             }
@@ -46,8 +48,8 @@ class VerifiPassword {
     }
     contains_lower_leters() {
         const pass = this.password
-        for (let i in this.vocals) {
-            const lower = this.vocals[i].toLowerCase()
+        for (let i in this.letras) {
+            const lower = this.letras[i].toLowerCase()
             if (pass.includes(lower)) {
                 return true
             }
