@@ -7,10 +7,6 @@ class VerifiUserData {
 
     }
 
-    test_post() {
-
-    }
-
     async test_nombre() {
         const nNombre = this.user_data.nombre
         if (nNombre.length > 3) {
