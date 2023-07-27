@@ -21,7 +21,9 @@ class VerifyPassword {
         const pass = this.password
 
         for (let i in this.letras) {
-            return pass.includes(this.letras[i])
+            if (pass.includes(this.letras[i])) {
+                return true
+            }
         }
 
     }
@@ -29,7 +31,9 @@ class VerifyPassword {
         const pass = this.password
 
         for (let i in this.simbols) {
-            return pass.includes(this.simbols[i])
+            if (pass.includes(this.simbols[i])) {
+                return true
+            }
         }
 
     }
@@ -37,14 +41,18 @@ class VerifyPassword {
         const pass = this.password
         for (let i in this.letras) {
             const upper = this.letras[i].toUpperCase()
-            return pass.includes(upper)
+            if (pass.includes(upper)) {
+                return true
+            }
         }
     }
     contains_lower_leters() {
         const pass = this.password
         for (let i in this.letras) {
             const lower = this.letras[i].toLowerCase()
-            return pass.includes(lower)
+            if (pass.includes(lower)) {
+                return true
+            }
         }
     }
 }
