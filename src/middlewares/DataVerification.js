@@ -15,6 +15,29 @@ class DataVerification {
             return true
         }
     }
+
+    async verify_email() {
+        const data_email = await this.data_controller.test_email()
+        if (data_email === undefined) {
+            return 'el email no cumple con los requisitos'
+        }
+        if (data_email.length > 0) {
+            return `el usuario con email ${data_email} ya tiene una cuenta registrada`
+        } else if (data_email.length === 0) {
+            return true
+        }
+    }
+
+    verify_password() {
+        const data_password = this.data_controller.test_password()
+        if (data_password === undefined) {
+            return 'la password no cumple con las condiciones'
+        } else {
+
+            return true
+        }
+    }
+
 }
 
 module.exports = DataVerification;

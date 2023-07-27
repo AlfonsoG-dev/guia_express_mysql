@@ -1,7 +1,7 @@
 //dependencias
 const express = require('express')
 const UserController = require("../service/data_query")
-const VerifiUserData = require("../middlewares/verifi_data")
+const DataVerification = require("../middlewares/DataVerification")
 const User = require('../model/user_model')
 const user_route = express.Router()
 
@@ -58,10 +58,8 @@ user_route.get("/get-name/:name", async function (req, res) {
 user_route.post("/post-user", async function (req, res) {
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
-        const consulta = await query.read_by_name(data_user.get_name)
-        const verifi = new VerifiUserData(data_user)
-        const nombre = verifi.test_rol()
-        console.log(nombre)
+        const verify_Data = new DataVerification(data_user)
+        res.status(200).json(await verify_Data.verify_password())
         /*         if (consulta.length == 0) {
                     const data_post = await query.insert_user(data_user)
                     res.status(201).json(data_post)
