@@ -60,7 +60,7 @@ user_route.post("/post-user", async function (req, res) {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
         const consulta = await query.read_by_name(data_user.get_name)
         const verifi = new VerifiUserData(data_user)
-        const nombre = await verifi.test_password()
+        const nombre = verifi.test_rol()
         console.log(nombre)
         /*         if (consulta.length == 0) {
                     const data_post = await query.insert_user(data_user)

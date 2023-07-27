@@ -8,10 +8,6 @@ class VerifiUserData {
     }
 
     test_post() {
-        const nombre = this.user_data.nombre
-        const email = this.user_data.email
-        const password = this.user_data.password
-        const rol = this.user_data.rol
 
     }
 
@@ -43,7 +39,28 @@ class VerifiUserData {
     test_password() {
         const nPassword = this.user_data.password
         const n_pass = new VerifiPassword(nPassword).get_password
-        return n_pass
+        if (n_pass !== undefined) {
+            return n_pass
+        } else {
+            return undefined
+        }
+    }
+
+    test_rol() {
+        const nRol = this.user_data.rol
+        switch (nRol) {
+            case 'admin':
+                return 'solo admin puede crear un usuario admin'
+            case 'test':
+                return nRol
+            case 'operador':
+                return 'solo admin puede crear un usuario test'
+            case 'registro':
+                return 'solo admin puede crear un usuario registro'
+            default:
+                return undefined
+        }
+
     }
 
 }
