@@ -59,16 +59,24 @@ user_route.post("/post-user", async function (req, res) {
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
         const verify_Data = new DataVerification(data_user)
-        res.status(200).json(await verify_Data.verify_password())
-        /*         if (consulta.length == 0) {
-                    const data_post = await query.insert_user(data_user)
-                    res.status(201).json(data_post)
-                } else {
-                    res.status(400).send(`el usuario con nombre ${data_user.get_name} ya existe`)
-                } */
-    }
-    catch (error) {
-        throw new Error(error)
+        const data = verify_Data;
+        if (await data.verify_nombre() !== true ||
+            await data.verify_email() !== true ||
+            data.verify_password() !== true) {
+            res.json({
+                error1: await data.verify_nombre(),
+                error2: await data.verify_email(),
+                error3: data.verify_password()
+            })
+        }
+        if (await data.verify_nombre() === true &&
+            await data.verify_email() === true &&
+            data.verify_password() === true) {
+            await query.insert_user(data_user)
+            res.status(201).json({ exito: data_user.get_name })
+        }
+    } catch (err) {
+        throw new Error(err)
     }
 })
 

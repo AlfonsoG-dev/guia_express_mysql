@@ -11,7 +11,7 @@ class VerifyPassword {
             this.contains_simbol() === true &&
             this.contains_uper_leters() === true &&
             this.contains_lower_leters() === true &&
-            this.password.length > 8) {
+            this.password.length > 3) {
 
             return this.password
         }
