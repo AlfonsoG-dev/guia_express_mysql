@@ -1,5 +1,5 @@
 
-class VerifiPassword {
+class VerifyPassword {
     constructor(nPassword = '') {
         this.password = nPassword
         this.letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -21,9 +21,7 @@ class VerifiPassword {
         const pass = this.password
 
         for (let i in this.letras) {
-            if (pass.includes(this.letras[i])) {
-                return true
-            }
+            return pass.includes(this.letras[i])
         }
 
     }
@@ -31,9 +29,7 @@ class VerifiPassword {
         const pass = this.password
 
         for (let i in this.simbols) {
-            if (pass.includes(this.simbols[i])) {
-                return true
-            }
+            return pass.includes(this.simbols[i])
         }
 
     }
@@ -41,20 +37,16 @@ class VerifiPassword {
         const pass = this.password
         for (let i in this.letras) {
             const upper = this.letras[i].toUpperCase()
-            if (pass.includes(upper)) {
-                return true
-            }
+            return pass.includes(upper)
         }
     }
     contains_lower_leters() {
         const pass = this.password
         for (let i in this.letras) {
             const lower = this.letras[i].toLowerCase()
-            if (pass.includes(lower)) {
-                return true
-            }
+            return pass.includes(lower)
         }
     }
 }
 
-module.exports = VerifiPassword;
+module.exports = VerifyPassword;
