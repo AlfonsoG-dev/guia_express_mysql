@@ -19,17 +19,18 @@ class VerifyPassword {
         }
 
     }
-    // algunos simbolos causan que no se pueda identificar el número exacto de coincidencias
-    //los simbolos como las {} o [] antes de las coincidencias no permiten identificar correctamente
+    clean_simbols() {
+        const pass = this.password
+        return pass.replaceAll(/[^a-zA-Z]/g, '')
+    }
     contains_repeated() {
-        const pass = this.password.toLowerCase()
+        const pass = this.clean_simbols().toLowerCase()
         let primera = pass[0].toLowerCase()
         let cont = 0;
         for (let i in pass) {
 
             if (pass[i].includes(primera)) {
                 cont += 1
-            } else {
                 primera = pass[i]
             }
         }
