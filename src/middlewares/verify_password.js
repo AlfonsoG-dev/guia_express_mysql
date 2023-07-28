@@ -24,6 +24,8 @@ class VerifyPassword {
         for (let i in this.letras) {
             if (pass.includes(this.letras[i])) {
                 return true
+            } else if (pass.toLowerCase().includes(this.letras[i])) {
+                return true
             }
         }
 
