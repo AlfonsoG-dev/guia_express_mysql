@@ -18,6 +18,20 @@ class VerifyPassword {
         }
 
     }
+    contains_repeated() {
+        const pass = this.password
+        let cont = 0;
+        for (let i in pass) {
+            let primera = pass[0]
+
+            if (pass[i].includes(primera)) {
+                cont += 1
+            } else {
+                primera = pass[i]
+            }
+        }
+        return cont
+    }
     contains_letras() {
         const pass = this.password
 
