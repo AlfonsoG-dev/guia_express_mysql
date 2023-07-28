@@ -19,6 +19,8 @@ class VerifyPassword {
         }
 
     }
+    // algunos simbolos causan que no se pueda identificar el número exacto de coincidencias
+    //los simbolos como las {} o [] antes de las coincidencias no permiten identificar correctamente
     contains_repeated() {
         const pass = this.password
         let cont = 0;
