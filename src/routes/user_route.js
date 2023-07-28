@@ -1,7 +1,7 @@
 //dependencias
 const express = require('express')
 const UserController = require("../service/data_query")
-const DataVerification = require("../middlewares/DataVerification")
+const DataVerification = require("../utils/DataVerification")
 const User = require('../model/user_model')
 const user_route = express.Router()
 
