@@ -1,5 +1,5 @@
 const UserController = require("../service/data_query")
-const VerifyPassword = require("./verify_password")
+const VerifyPassword = require("./util-password/verify_password")
 class DataController {
     constructor(data_post = {}) {
         this.user_data = data_post
