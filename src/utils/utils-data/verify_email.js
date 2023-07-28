@@ -22,7 +22,9 @@ class VerifyEmail {
     is_admin() {
         const data_1 = this.email.split('@')
         const data_2 = data_1[1].split('.')
-        if (data_2.includes('admin')) {
+        const data_2_1 = data_1[1].split('-')
+        if (data_2.includes('admin') ||
+            data_2_1.includes('admin')) {
             return true
         }
     }
@@ -30,7 +32,9 @@ class VerifyEmail {
     is_test() {
         const data_1 = this.email.split('@')
         const data_2 = data_1[1].split('.')
-        if (data_2.includes('test')) {
+        const data_2_1 = data_1[1].split('-')
+        if (data_2.includes('test') ||
+            data_2_1.includes('test')) {
             return true
         }
     }

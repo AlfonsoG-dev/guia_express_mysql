@@ -22,7 +22,7 @@ class DataVerification {
             return 'el email no cumple con los requisitos'
         }
         if (data_email.length > 0) {
-            return `el usuario con email ${data_email} ya tiene una cuenta registrada`
+            return `el usuario con email ${data_email[0].email} ya tiene una cuenta registrada`
         } else if (data_email.length === 0) {
             return true
         }
