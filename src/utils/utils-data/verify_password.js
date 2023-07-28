@@ -25,7 +25,7 @@ class VerifyPassword {
     }
     contains_repeated() {
         const pass = this.clean_simbols().toLowerCase()
-        let primera = pass[0].toLowerCase()
+        let primera = pass[0]
         let cont = 0;
         for (let i in pass) {
 
