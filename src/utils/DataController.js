@@ -1,5 +1,6 @@
 const UserController = require("../service/data_query")
-const VerifyPassword = require("./util-password/verify_password")
+const VerifyPassword = require("./utils-data/verify_password")
+const VerifyEmail = require("./utils-data/verify_email")
 class DataController {
     constructor(data_post = {}) {
         this.user_data = data_post
@@ -20,13 +21,10 @@ class DataController {
 
     async test_email() {
         const nEmail = this.user_data.email
-        if (nEmail.length > 3) {
-            for (let i in nEmail) {
-                if (nEmail[i] === '@') {
-                    const data = await this.query.read_by_email(nEmail)
-                    return data
-                }
-            }
+        const v_email = new VerifyEmail(nEmail).get_email
+        if (v_email !== undefined) {
+            const data = await this.query.read_by_email(v_email)
+            return data
         } else {
             return undefined
         }
