@@ -2,8 +2,8 @@
 class VerifyPassword {
     constructor(nPassword = '') {
         this.password = nPassword
-        this.letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-        this.simbols = ['!', '@', '#', '$', '%', '&', '()', '+', '*', '{}', '[]', ';', ':', '-', '_']
+        this.letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        this.simbols = ['!', '@', '#', '$', '%', '&', '(', ')', '+', '*', '{', '}', '[', ']', ';', ':', '-', '_', '~', '¿', '?', '¡', '<', '>', '°', '|', '^']
     }
 
     get get_password() {
@@ -11,6 +11,7 @@ class VerifyPassword {
             this.contains_simbol() === true &&
             this.contains_uper_leters() === true &&
             this.contains_lower_leters() === true &&
+            this.contains_numbers() === true &&
             this.password.length > 3) {
 
             return this.password
@@ -36,6 +37,15 @@ class VerifyPassword {
             }
         }
 
+    }
+    contains_numbers() {
+        const pass = this.password
+        for (let i in pass) {
+            const parser = pass[i]
+            if (parseInt(parser) - parseInt(parser) === 0) {
+                return true
+            }
+        }
     }
     contains_uper_leters() {
         const pass = this.password
