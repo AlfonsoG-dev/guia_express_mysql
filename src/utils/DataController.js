@@ -1,6 +1,7 @@
 const UserController = require("../service/data_query")
 const VerifyPassword = require("./utils-data/verify_password")
 const VerifyEmail = require("./utils-data/verify_email")
+//todo: cambiar las verificaciones del string por expresiones regulares o algo parecido
 class DataController {
     constructor(data_post = {}) {
         this.user_data = data_post
