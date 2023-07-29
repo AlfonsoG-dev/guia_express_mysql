@@ -32,6 +32,9 @@ app.get("/", async function (req, res) {
     const res_data = res[customSymbol]
     res.send(`req: ${req_data} / res: ${res_data}`)
 })
+app.use(function (req, res) {
+    res.status(404).end()
+})
 app.listen(port, function () {
     console.log(`express server in port: ${port}`)
 })
