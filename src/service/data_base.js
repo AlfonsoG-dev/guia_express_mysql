@@ -7,7 +7,7 @@ const connection = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB,
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 3,
     maxIdle: 3,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0
