@@ -14,6 +14,8 @@ class VerifyPassword {
             this.contains_numbers() === true &&
             this.contains_repeated() < 3 &&
             this.contains_repeated_other_order() < 3 &&
+            this.contains_repeated_number() < 3 &&
+            this.contains_repeated_number_order() < 3 &&
             this.password.length > 4) {
 
             return this.password
@@ -85,6 +87,42 @@ class VerifyPassword {
             }
         }
     }
+    contains_repeated_number() {
+        const pass = this.password
+        const regex_pass = pass.match(/[0-9]/g)
+        let cont = 0;
+        for (let i in regex_pass) {
+            let primera = regex_pass[0]
+            if (primera === regex_pass[i]) {
+                cont += 1;
+                primera = regex_pass[i]
+            }
+        }
+        return cont
+    }
+    contains_repeated_number_order() {
+        const or_pass = this.password
+        const regex_pass = or_pass.match(/[0-9]/g)
+        const order_num = () => {
+            let sm = regex_pass.sort()
+            let rs = sm.join("")
+            return rs
+        }
+        const pass = order_num()
+        let cont = 0;
+        for (let i in pass) {
+            let primero = pass[1]
+            if (primero === pass[i]) {
+                cont += 1;
+                primero = pass[i]
+            } else {
+                primero = pass[1]
+            }
+        }
+        return cont
+
+    }
+
     contains_uper_leters() {
         const pass = this.password
         for (let i in this.letras) {
