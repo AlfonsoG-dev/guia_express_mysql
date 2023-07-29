@@ -16,7 +16,7 @@ user_route.get("/", async function (req, res) {
 
             res.status(201).json(data_res)
         } else {
-            res.status(400).send("error no se encuentran datos ")
+            res.status(400).json({ error: 'datos no disponibles' })
         }
     } catch (error) {
         res.end()
@@ -35,7 +35,7 @@ user_route.get("/:id", async function (req, res) {
         if (data_res.length > 0) {
             res.status(201).json(data_res)
         } else {
-            res.status(400).send({ error: `el usuario con id ${user_id} no se encuentra registrado` })
+            res.status(400).json({ error: `el usuario con id ${user_id} no se encuentra registrado` })
         }
     } catch (error) {
         res.end()
@@ -54,7 +54,7 @@ user_route.get("/get-name/:name", async function (req, res) {
         if (data_res.length > 0) {
             res.status(201).json(data_res)
         } else {
-            res.status(400).send(`error el usuario con el nombre_: ${user_name} no se encuentra registrado`)
+            res.status(400).json({ error: `error el usuario con el nombre_: ${user_name} no se encuentra registrado` })
         }
 
     } catch (err) {
@@ -104,7 +104,7 @@ user_route.delete("/delete-user/:id", async function (req, res) {
             const data_delete = await query.delete_user(user_id)
             res.status(201).json(data_delete)
         } else {
-            res.status(400).send(`error el usuario con id_: ${user_id} no esta registrado`)
+            res.status(400).json({ error: `error el usuario con id_: ${user_id} no esta registrado` })
         }
 
     } catch (err) {
