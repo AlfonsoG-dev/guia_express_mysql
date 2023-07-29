@@ -31,7 +31,7 @@ user_route.get("/:id", async function (req, res) {
         if (data_res.length > 0) {
             res.status(201).json(data_res)
         } else {
-            res.status(400).send(`error el usuario con id_: ${user_id} no se encuentra registrado`)
+            res.status(400).send({ error: `el usuario con id ${user_id} no se encuentra registrado` })
         }
     } catch (error) {
         res.end()
