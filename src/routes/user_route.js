@@ -21,8 +21,6 @@ user_route.get("/", async function (req, res) {
     } catch (error) {
         res.end()
         throw new Error(error)
-    } finally {
-        query.close_connection_db()
     }
 })
 
@@ -39,8 +37,6 @@ user_route.get("/:id", async function (req, res) {
     } catch (error) {
         res.end()
         throw new Error(error)
-    } finally {
-        query.close_connection_db()
     }
 })
 
@@ -58,8 +54,6 @@ user_route.get("/get-name/:name", async function (req, res) {
     } catch (err) {
         res.end()
         throw new Error(err)
-    } finally {
-        query.close_connection_db()
     }
 })
 
@@ -86,8 +80,6 @@ user_route.post("/post-user", async function (req, res) {
         }
     } catch (err) {
         throw new Error(err)
-    } finally {
-        query.close_connection_db()
     }
 })
 
@@ -106,8 +98,6 @@ user_route.delete("/delete-user/:id", async function (req, res) {
     } catch (err) {
         res.end()
         throw new Error(err)
-    } finally {
-        query.close_connection_db()
     }
 })
 

@@ -5,7 +5,8 @@ const User = require("../model/user_model")
 
 class UserController {
     constructor() {
-        this.connection = mysql2.createConnection(connection_db)
+        const pool = mysql2.createPool(connection_db)
+        this.connection = pool
     }
     read_all() {
         return new Promise((resolve, reject) => {
@@ -61,8 +62,5 @@ class UserController {
         })
     }
 
-    close_connection_db() {
-        this.connection.destroy()
-    }
 }
 module.exports = UserController
