@@ -15,13 +15,15 @@ class VerifyNombre {
     }
     is_admin() {
         const nombre = this.clean_simbols()
-        if (nombre === 'admin') {
+        const nombre_regx = nombre.match(/admin/)
+        if (nombre === 'admin' || nombre_regx !== null) {
             return true
         }
     }
     is_test() {
         const nombre = this.clean_simbols()
-        if (nombre === 'test') {
+        const nombre_regx = nombre.match(/test/)
+        if (nombre === 'test' || nombre_regx !== null) {
             return true
         }
     }
