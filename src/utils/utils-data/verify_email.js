@@ -12,29 +12,26 @@ class VerifyEmail {
         }
     }
     is_email_format() {
-        const data = this.email
-        for (let i in data) {
-            if (data[i] === '@') {
-                return true
-            }
+        const data = this.email.match(/@/)
+        if (data !== null) {
+            return true
         }
     }
+
+    clean_simbols() {
+        const email = this.email
+        return email.replaceAll(/[^a-zA-Z]/g, '')
+    }
     is_admin() {
-        const data_1 = this.email.split('@')
-        const data_2 = data_1[1].split('.')
-        const data_2_1 = data_1[1].split('-')
-        if (data_2.includes('admin') ||
-            data_2_1.includes('admin')) {
+        const email_regx = this.clean_simbols().match(/admin/)
+        if (email_regx !== null) {
             return true
         }
     }
 
     is_test() {
-        const data_1 = this.email.split('@')
-        const data_2 = data_1[1].split('.')
-        const data_2_1 = data_1[1].split('-')
-        if (data_2.includes('test') ||
-            data_2_1.includes('test')) {
+        const email_regx = this.clean_simbols().match(/test/)
+        if (email_regx !== null) {
             return true
         }
     }
