@@ -9,7 +9,7 @@ class UserController {
     }
     read_all() {
         return new Promise((resolve, reject) => {
-            this.connection.execute('select * from user', (err, res) => {
+            this.connection.execute('select nombre, email, rol from user', (err, res) => {
                 if (err) reject(err)
                 resolve(res)
             })
@@ -18,7 +18,7 @@ class UserController {
 
     read_by_id(id = 0) {
         return new Promise((resolvem, reject) => {
-            this.connection.execute('select * from user where id = ?', [id], (err, res) => {
+            this.connection.execute('select nombre, email, rol from user where id = ?', [id], (err, res) => {
                 if (err) reject(err)
                 resolvem(res)
             })
