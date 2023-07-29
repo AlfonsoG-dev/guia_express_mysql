@@ -1,6 +1,7 @@
 const UserController = require("../service/data_query")
 const VerifyPassword = require("./utils-data/verify_password")
 const VerifyEmail = require("./utils-data/verify_email")
+const VerifyNombre = require("./utils-data/verify_nombre")
 //todo: cambiar las verificaciones del string por expresiones regulares o algo parecido
 class DataController {
     constructor(data_post = {}) {
@@ -11,7 +12,8 @@ class DataController {
 
     async test_nombre() {
         const nNombre = this.user_data.nombre
-        if (nNombre.length > 3) {
+        const v_nombre = new VerifyNombre(nNombre).get_v_nombre
+        if (v_nombre !== undefined) {
             const data = await this.query.read_by_name(nNombre)
             return data
         } else {
