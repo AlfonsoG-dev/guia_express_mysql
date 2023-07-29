@@ -7,6 +7,7 @@ class UserController {
     constructor() {
         const pool = mysql2.createPool(connection_db)
         this.connection = pool
+        console.log('conexión creada')
     }
     read_all() {
         return new Promise((resolve, reject) => {
@@ -61,6 +62,8 @@ class UserController {
             })
         })
     }
-
+    close_connection() {
+        this.connection.end()
+    }
 }
 module.exports = UserController

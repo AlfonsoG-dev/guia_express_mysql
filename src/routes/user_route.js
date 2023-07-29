@@ -21,6 +21,9 @@ user_route.get("/", async function (req, res) {
     } catch (error) {
         res.end()
         throw new Error(error)
+    } finally {
+        console.log('conexión cerrada')
+        query.close_connection()
     }
 })
 
@@ -37,6 +40,9 @@ user_route.get("/:id", async function (req, res) {
     } catch (error) {
         res.end()
         throw new Error(error)
+    } finally {
+        console.log('conexión cerrada')
+        query.close_connection()
     }
 })
 
@@ -54,6 +60,9 @@ user_route.get("/get-name/:name", async function (req, res) {
     } catch (err) {
         res.end()
         throw new Error(err)
+    } finally {
+        console.log('conexión cerrada')
+        query.close_connection()
     }
 })
 
@@ -80,6 +89,9 @@ user_route.post("/post-user", async function (req, res) {
         }
     } catch (err) {
         throw new Error(err)
+    } finally {
+        console.log('conexión cerrada')
+        query.close_connection()
     }
 })
 
@@ -98,6 +110,9 @@ user_route.delete("/delete-user/:id", async function (req, res) {
     } catch (err) {
         res.end()
         throw new Error(err)
+    } finally {
+        console.log('conexión cerrada')
+        query.close_connection()
     }
 })
 
