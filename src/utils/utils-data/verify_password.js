@@ -12,8 +12,8 @@ class VerifyPassword {
             this.contains_uper_leters() === true &&
             this.contains_lower_leters() === true &&
             this.contains_numbers() === true &&
-            this.contains_repeated() < 4 &&
-            this.contains_repeated_other_order() < 4 &&
+            this.contains_repeated() < 3 &&
+            this.contains_repeated_other_order() < 3 &&
             this.password.length > 4) {
 
             return this.password
