@@ -13,6 +13,7 @@ class VerifyPassword {
             this.contains_lower_leters() === true &&
             this.contains_numbers() === true &&
             this.contains_repeated() < 4 &&
+            this.contains_repeated_other_order() < 4 &&
             this.password.length > 4) {
 
             return this.password
@@ -23,12 +24,29 @@ class VerifyPassword {
         const pass = this.password
         return pass.replaceAll(/[^a-zA-Z]/g, '')
     }
+    contains_repeated_other_order() {
+        const order_pass = () => {
+            let sin_simbols = this.clean_simbols().toLowerCase().split("")
+            let ord = sin_simbols.sort()
+            return ord.join("")
+        }
+        let pass = order_pass()
+        let primera = pass[0]
+        let cont = 0;
+        for (let i in pass) {
+            if (pass[i].includes(primera)) {
+                cont += 1
+                primera = pass[i]
+            }
+        }
+        return cont
+
+    }
     contains_repeated() {
         const pass = this.clean_simbols().toLowerCase()
         let primera = pass[0]
         let cont = 0;
         for (let i in pass) {
-
             if (pass[i] === primera) {
                 cont += 1
                 primera = pass[i]
