@@ -29,7 +29,7 @@ class VerifyPassword {
         let cont = 0;
         for (let i in pass) {
 
-            if (pass[i].includes(primera)) {
+            if (pass[i] === primera) {
                 cont += 1
                 primera = pass[i]
             }
