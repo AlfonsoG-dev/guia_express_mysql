@@ -1,108 +1,19 @@
 //dependencias
 const express = require('express')
-const UserController = require("../service/data_query")
-const DataVerification = require("../utils/DataVerification")
-const User = require('../model/user_model')
+const UserRouterController = require("../controllers/user_route_controller")
 const user_route = express.Router()
 
 
 //instancias 
+const routeController = new UserRouterController()
+user_route.get("/", routeController.list_users.bind(routeController))
 
-user_route.get("/", async function (req, res) {
-    const query = new UserController()
-    try {
-        const data_res = await query.read_all()
-        if (data_res) {
-            res.status(201).json(data_res)
-        } else {
-            res.status(400).json({ error: 'datos no disponibles' })
-        }
-    } catch (error) {
-        res.end()
-        throw new Error(error)
-    } finally {
-        console.log('conexión cerrada')
-        query.close_connection()
-    }
-})
+user_route.get("/:id", routeController.get_user_id.bind(routeController))
 
-user_route.get("/:id", async function (req, res) {
-    const query = new UserController()
-    try {
-        const user_id = parseInt(req.params.id)
-        const [data_res] = await query.read_by_id(user_id)
-        if (data_res['count(email)'] > 0) {
-            res.status(201).json({ exito: data_res['count(email)'] })
-        } else {
-            res.status(400).json({ error: `el usuario con id ${user_id} no se encuentra registrado` })
-        }
-    } catch (error) {
-        res.end()
-        throw new Error(error)
-    } finally {
-        console.log('conexión cerrada')
-        query.close_connection()
-    }
-})
+user_route.get("/get-name/:name", routeController.get_user_name.bind(routeController))
 
-user_route.get("/get-name/:name", async function (req, res) {
-    const query = new UserController()
-    try {
-        const user_name = req.params.name
-        const [data_res] = await query.read_by_name(user_name)
-        if (data_res['count(email)'] > 0) {
-            res.status(201).json({ exito: data_res['count(email)'] })
-        } else {
-            res.status(400).json({ error: `error el usuario con el nombre_: ${user_name} no se encuentra registrado` })
-        }
+user_route.post("/post-user", routeController.inser_user.bind(routeController))
 
-    } catch (err) {
-        res.end()
-        throw new Error(err)
-    } finally {
-        console.log('conexión cerrada')
-        query.close_connection()
-    }
-})
-
-user_route.post("/post-user", async function (req, res) {
-    const query = new UserController()
-    try {
-        const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
-        const verify_Data = new DataVerification(data_user).verify_request()
-        if (verify_Data !== true) {
-            res.json(await verify_Data)
-        } else {
-            await query.insert_user(data_user)
-            res.status(201).json({ exito: data_user.get_name })
-        }
-    } catch (err) {
-        throw new Error(err)
-    } finally {
-        console.log('conexión cerrada')
-        query.close_connection()
-    }
-})
-
-user_route.delete("/delete-user/:id", async function (req, res) {
-    const query = new UserController()
-    try {
-        const user_id = req.params.id
-        const [consulta] = await query.read_by_id(user_id)
-        if (consulta['count(email)'] > 0) {
-            const data_delete = await query.delete_user(user_id)
-            res.status(201).json(data_delete)
-        } else {
-            res.status(400).json({ error: `error el usuario con id_: ${user_id} no esta registrado` })
-        }
-
-    } catch (err) {
-        res.end()
-        throw new Error(err)
-    } finally {
-        console.log('conexión cerrada')
-        query.close_connection()
-    }
-})
+user_route.delete("/delete-user/:id", routeController.truncate_user.bind(routeController))
 
 module.exports = user_route

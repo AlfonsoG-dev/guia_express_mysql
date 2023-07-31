@@ -1,12 +1,12 @@
-const UserController = require("../service/data_query")
+const DataQuery = require("../service/data_query")
 const VerifyPassword = require("./utils-data/verify_password")
 const VerifyEmail = require("./utils-data/verify_email")
 const VerifyNombre = require("./utils-data/verify_nombre")
 //todo: cambiar las verificaciones del string por expresiones regulares o algo parecido
-class DataController {
+class DataErrorVerification {
     constructor(data_post = {}) {
         this.user_data = data_post
-        this.query = new UserController()
+        this.query = new DataQuery()
 
     }
 
@@ -62,4 +62,4 @@ class DataController {
 
 }
 
-module.exports = DataController
+module.exports = DataErrorVerification

@@ -1,7 +1,7 @@
-const DataController = require("./DataController")
+const DataErrorVerification = require("./DataErrorVerification")
 class DataVerification {
     constructor(post_data) {
-        this.data_controller = new DataController(post_data)
+        this.data_controller = new DataErrorVerification(post_data)
     }
 
     async verify_request() {
@@ -13,6 +13,8 @@ class DataVerification {
                 err_email: await this.verify_email(),
                 err_password: this.verify_password()
             }
+        } else {
+            return true
         }
     }
 

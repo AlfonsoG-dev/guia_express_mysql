@@ -3,7 +3,7 @@ const connection_db = require("./data_base")
 const User = require("../model/user_model")
 
 
-class UserController {
+class DataQuery {
     constructor() {
         const pool = mysql2.createPool(connection_db)
         this.connection = pool
@@ -66,4 +66,4 @@ class UserController {
         this.connection.end()
     }
 }
-module.exports = UserController
+module.exports = DataQuery

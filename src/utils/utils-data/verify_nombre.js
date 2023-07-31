@@ -4,7 +4,7 @@ class VerifyNombre {
     }
 
     get get_v_nombre() {
-        if ((this.is_admin() === undefined || this.is_test() === undefined) &&
+        if (this.is_admin() === undefined && this.is_test() === undefined &&
             this.nombre.length > 3) {
             return this.nombre
         }
