@@ -31,9 +31,9 @@ user_route.get("/:id", async function (req, res) {
     const query = new UserController()
     try {
         const user_id = parseInt(req.params.id)
-        const data_res = await query.read_by_id(user_id)
-        if (data_res.length > 0) {
-            res.status(201).json(data_res)
+        const [data_res] = await query.read_by_id(user_id)
+        if (data_res['count(email)'] > 0) {
+            res.status(201).json({ exito: data_res['count(email)'] })
         } else {
             res.status(400).json({ error: `el usuario con id ${user_id} no se encuentra registrado` })
         }
@@ -50,9 +50,9 @@ user_route.get("/get-name/:name", async function (req, res) {
     const query = new UserController()
     try {
         const user_name = req.params.name
-        const data_res = await query.read_by_name(user_name)
-        if (data_res.length > 0) {
-            res.status(201).json(data_res)
+        const [data_res] = await query.read_by_name(user_name)
+        if (data_res['count(email)'] > 0) {
+            res.status(201).json({ exito: data_res['count(email)'] })
         } else {
             res.status(400).json({ error: `error el usuario con el nombre_: ${user_name} no se encuentra registrado` })
         }
@@ -99,8 +99,8 @@ user_route.delete("/delete-user/:id", async function (req, res) {
     const query = new UserController()
     try {
         const user_id = req.params.id
-        const consulta = await query.read_by_id(user_id)
-        if (consulta.length > 0) {
+        const [consulta] = await query.read_by_id(user_id)
+        if (consulta['count(email)'] > 0) {
             const data_delete = await query.delete_user(user_id)
             res.status(201).json(data_delete)
         } else {

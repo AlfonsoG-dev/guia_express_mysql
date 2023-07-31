@@ -14,7 +14,7 @@ class DataController {
         const nNombre = this.user_data.nombre
         const v_nombre = new VerifyNombre(nNombre).get_v_nombre
         if (v_nombre !== undefined) {
-            const data = await this.query.read_by_name(nNombre)
+            const [data] = await this.query.read_by_name(nNombre)
             return data
         } else {
 
@@ -26,7 +26,7 @@ class DataController {
         const nEmail = this.user_data.email
         const v_email = new VerifyEmail(nEmail).get_email
         if (v_email !== undefined) {
-            const data = await this.query.read_by_email(v_email)
+            const [data] = await this.query.read_by_email(v_email)
             return data
         } else {
             return undefined

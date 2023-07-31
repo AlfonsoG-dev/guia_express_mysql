@@ -9,9 +9,9 @@ class DataVerification {
         if (data_name === undefined) {
             return 'el nombre no cumple con las condiciones'
         }
-        if (data_name.length > 0) {
+        if (data_name['count(email)'] > 0) {
             return 'el nombre de usuario ya se encuentra registrado'
-        } else if (data_name.length === 0) {
+        } else if (data_name['count(email)'] === 0) {
             return true
         }
     }
@@ -21,9 +21,9 @@ class DataVerification {
         if (data_email === undefined) {
             return 'el email no cumple con los requisitos'
         }
-        if (data_email.length > 0) {
+        if (data_email['count(email)'] > 0) {
             return `el usuario con email ${data_email[0].email} ya tiene una cuenta registrada`
-        } else if (data_email.length === 0) {
+        } else if (data_email['count(email)'] === 0) {
             return true
         }
     }
