@@ -4,6 +4,18 @@ class DataVerification {
         this.data_controller = new DataController(post_data)
     }
 
+    async verify_request() {
+        if (await this.verify_nombre() !== true ||
+            await this.verify_email() !== true ||
+            this.verify_password() !== true) {
+            return {
+                err_nombre: await this.verify_nombre(),
+                err_email: await this.verify_email(),
+                err_password: this.verify_password()
+            }
+        }
+    }
+
     async verify_nombre() {
         const data_name = await this.data_controller.test_nombre()
         if (data_name === undefined) {

@@ -13,7 +13,6 @@ user_route.get("/", async function (req, res) {
     try {
         const data_res = await query.read_all()
         if (data_res) {
-
             res.status(201).json(data_res)
         } else {
             res.status(400).json({ error: 'datos no disponibles' })
@@ -70,20 +69,10 @@ user_route.post("/post-user", async function (req, res) {
     const query = new UserController()
     try {
         const data_user = new User(req.body.nombre, req.body.email, req.body.password, req.body.rol)
-        const verify_Data = new DataVerification(data_user)
-        const data = verify_Data;
-        if (await data.verify_nombre() !== true ||
-            await data.verify_email() !== true ||
-            data.verify_password() !== true) {
-            res.json({
-                error1: await data.verify_nombre(),
-                error2: await data.verify_email(),
-                error3: data.verify_password()
-            })
-        }
-        if (await data.verify_nombre() === true &&
-            await data.verify_email() === true &&
-            data.verify_password() === true) {
+        const verify_Data = new DataVerification(data_user).verify_request()
+        if (verify_Data !== true) {
+            res.json(await verify_Data)
+        } else {
             await query.insert_user(data_user)
             res.status(201).json({ exito: data_user.get_name })
         }
