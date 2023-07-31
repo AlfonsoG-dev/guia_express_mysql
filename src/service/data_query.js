@@ -20,7 +20,7 @@ class UserController {
 
     read_by_id(id = 0) {
         return new Promise((resolvem, reject) => {
-            this.connection.execute('select nombre, email, rol from user where id = ?', [id], (err, res) => {
+            this.connection.execute('select count(nombre) from user where id = ?', [id], (err, res) => {
                 if (err) reject(err)
                 resolvem(res)
             })
@@ -29,7 +29,7 @@ class UserController {
 
     read_by_name(user_name = '') {
         return new Promise((resolve, reject) => {
-            this.connection.execute('select nombre, email, rol from user where nombre = ?', [user_name], function (err, res) {
+            this.connection.execute('select count(nombre) from user where nombre = ?', [user_name], function (err, res) {
                 if (err) reject(err)
                 resolve(res)
             })
@@ -38,7 +38,7 @@ class UserController {
     }
     read_by_email(user_email = '') {
         return new Promise((resolve, reject) => {
-            this.connection.execute('select nombre, email, rol from user where email = ?', [user_email], function (err, res) {
+            this.connection.execute('select count(nombre) from user where email = ?', [user_email], function (err, res) {
                 if (err) reject(err)
                 resolve(res)
             })
