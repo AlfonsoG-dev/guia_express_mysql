@@ -26,7 +26,7 @@ class UserRouterController {
             const user_id = parseInt(req.params.id)
             const data_res = await this.query.read_by_id(user_id)
             if (data_res.length > 0) {
-                res.status(200).json({ exito: data_res })
+                res.status(200).json({ exito: data_res[0] })
             } else {
 
                 res.status(400).json({ error: `el usuario con id_: ${req.params.id} no se encuentra` })
@@ -41,7 +41,7 @@ class UserRouterController {
             const user_name = req.params.name
             const data_res = await this.query.read_by_name(user_name)
             if (data_res.length > 0) {
-                res.status(200).json({ exito: data_res })
+                res.status(200).json({ exito: data_res[0] })
             } else {
                 res.status(400).json({ error: `error el usuario con el nombre_: ${user_name} no se encuentra` })
             }
