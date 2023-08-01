@@ -4,6 +4,7 @@ const bytes = require("bytes")
 const cors = require("cors")
 const helmet = require("helmet")
 const body_parser = require("body-parser")
+const cookie_parser = require("cookie-parser")
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -16,8 +17,9 @@ const customSymbol = Symbol()
 //middleware
 app.use(helmet())
 app.use(cors())
-app.use(body_parser.urlencoded({extended: true}))
-app.use(body_parser.json({inflate: true, limit: bytes(10000)}))
+app.use(body_parser.urlencoded({ extended: true }))
+app.use(body_parser.json({ inflate: true, limit: bytes(10000) }))
+app.use(cookie_parser())
 app.use(function (req, res, next) {
     req[customSymbol] = req.ip
     res[customSymbol] = 'bienvenido ' + req.hostname

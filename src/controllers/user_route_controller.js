@@ -1,5 +1,5 @@
 const DataQuery = require("../service/data_query")
-const DataVerification = require("../utils/DataVerification")
+const DataErrorVerification = require("../utils/DataErrorVerification")
 const User = require("../model/user_model")
 
 
@@ -24,9 +24,9 @@ class UserRouterController {
     async get_user_id(req, res) {
         try {
             const user_id = parseInt(req.params.id)
-            const [data_res] = await this.query.read_by_id(user_id)
-            if (data_res['count(email)'] > 0) {
-                res.status(200).json({ exito: data_res['count(email)'] })
+            const data_res = await this.query.read_by_id(user_id)
+            if (data_res.length > 0) {
+                res.status(200).json({ exito: data_res })
             } else {
 
                 res.status(400).json({ error: `el usuario con id_: ${req.params.id} no se encuentra` })
@@ -39,9 +39,9 @@ class UserRouterController {
     async get_user_name(req, res) {
         try {
             const user_name = req.params.name
-            const [data_res] = await this.query.read_by_name(user_name)
-            if (data_res['count(email)'] > 0) {
-                res.status(200).json({ exito: data_res['count(email)'] })
+            const data_res = await this.query.read_by_name(user_name)
+            if (data_res.length > 0) {
+                res.status(200).json({ exito: data_res })
             } else {
                 res.status(400).json({ error: `error el usuario con el nombre_: ${user_name} no se encuentra` })
             }
@@ -54,7 +54,7 @@ class UserRouterController {
         try {
             const body = req.body
             const data_user = new User(body.nombre, body.email, body.password, body.rol)
-            const verify_data = new DataVerification(data_user).verify_request()
+            const verify_data = new DataErrorVerification(data_user).verify_request()
             if (await verify_data !== true || await verify_data === undefined) {
                 res.status(400).json(await verify_data)
             } else if (await verify_data === true) {
@@ -70,9 +70,8 @@ class UserRouterController {
     async truncate_user(req, res) {
         try {
             const user_id = parseInt(req.params.id)
-            const [buscado] = await this.query.read_by_id(user_id)
-            console.log(buscado['count(email)'])
-            if (buscado['count(email)'] > 0) {
+            const buscado = await this.query.read_by_id(user_id)
+            if (buscado.length > 0) {
                 const data_delete = await this.query.delete_user(user_id)
                 res.status(200).json(data_delete)
             } else {
