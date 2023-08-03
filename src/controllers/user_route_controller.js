@@ -10,9 +10,9 @@ class UserRouterController {
     async verificar_integridad(req, res, next) {
         try {
             const [database, table_user, table_cuenta] = Promise.allSettled([this.query.verificar_database(), this.query.verificar_table_user(), this.query.verificar_table_cuenta()])
-            console.log(`database: ${database} \n 
-            user: ${table_user} \n
-            cuenta: ${table_cuenta}
+            console.log(`database: ${await database} \n 
+            user: ${await table_user} \n
+            cuenta: ${await table_cuenta}
             `)
             next()
 
