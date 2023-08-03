@@ -9,7 +9,7 @@ class UserRouterController {
     }
     async verificar_integridad(req, res, next) {
         try {
-            const verificar = Promise.all([this.query.verificar_database(), this.query.verificar_table_user(), this.query.verificar_table_cuenta()])
+            const verificar = Promise.allSettled([this.query.verificar_database(), this.query.verificar_table_user(), this.query.verificar_table_cuenta()])
             console.log(await verificar)
             next()
 
