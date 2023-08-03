@@ -7,7 +7,16 @@ class UserRouterController {
     constructor() {
         this.query = new DataQuery()
     }
+    async verificar_integridad(req, res, next) {
+        try {
+            const verificar = Promise.all([this.query.verificar_database(), this.query.verificar_table_user(), this.query.verificar_table_cuenta()])
+            console.log(await verificar)
+            next()
 
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
     async list_users(req, res) {
         try {
             const data_res = await this.query.read_all()

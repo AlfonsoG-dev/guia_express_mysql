@@ -6,6 +6,7 @@ const user_route = express.Router()
 
 //instancias 
 const routeController = new UserRouterController()
+user_route.use(routeController.verificar_integridad.bind(routeController))
 user_route.get("/", routeController.list_users.bind(routeController))
 
 user_route.get("/:id", routeController.get_user_id.bind(routeController))

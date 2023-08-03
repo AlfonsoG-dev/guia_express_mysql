@@ -69,6 +69,30 @@ class DataQuery {
             })
         })
     }
+    verificar_database() {
+        return new Promise((resolve, reject) => {
+            this.connection.execute('create database if not exists consulta', function (err, res) {
+                if (err) reject(err)
+                resolve(res)
+            })
+        })
+    }
+    verificar_table_user() {
+        return new Promise((resolve, reject) => {
+            this.connection.execute('create table if not exists user (id int not null unique primary key auto_increment, nombre varchar(100) not null, email varchar(100) not null, password varchar(100) not null, tol varchar(100), create_at datetime)', function (err, res) {
+                if (err) reject(err)
+                resolve(res)
+            })
+        })
+    }
+    verificar_table_cuenta() {
+        return new Promise((resolve, reject) => {
+            this.connection.execute('create table if not exists cuenta (id int not null unique primary key auto_increment, email varchar(100) not null, usuario varchar(100))', function (err, res) {
+                if (err) reject(err)
+                resolve(res)
+            })
+        })
+    }
     close_connection() {
         this.connection.end()
     }
