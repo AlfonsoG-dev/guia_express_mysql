@@ -1,15 +1,19 @@
-const dotenv = require("dotenv")
-dotenv.config()
+const dotenv = require("dotenv");
+const mysql = require("mysql2");
+dotenv.config();
 
-const connection = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB,
-    waitForConnections: true,
-    connectionLimit: 3,
-    maxIdle: 3,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 0
+
+class DBConnection {
+    constructor() {
+        this.mysql = mysql;
+    }
+    create_normal_connecction() {
+        return this.mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER || 'root',
+            password: process.env.DB_PASSWORD,
+        });
+
+    }
 }
-module.exports = connection
+module.exports = DBConnection;
