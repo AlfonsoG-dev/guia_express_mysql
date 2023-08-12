@@ -9,12 +9,14 @@ class UserRoutes {
     constructor() {
         this.routeController = new UserRouterController();
     }
-
-    get_routes() {
+    apply_middleware() {
 
         // TODO:verificar no funciona
         user_route.use(this.routeController.verificar_integridad_user.bind(this.routeController));
 
+    }
+    get_routes() {
+        this.apply_middleware();
         user_route.get("/", this.routeController.list_users.bind(this.routeController));
 
         user_route.get("/:id", this.routeController.get_user_id.bind(this.routeController));
