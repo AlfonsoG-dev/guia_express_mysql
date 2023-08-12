@@ -5,7 +5,7 @@ const bytes = require("bytes");
 const cors = require("cors");
 const helmet = require("helmet");
 const cookie_parser = require("cookie-parser");
-const UserRoutes = require("./src/routes/user_route");
+const UserRoutes = require("./routes/user_route");
 const dotenv = require("dotenv");
 dotenv.config();
 class ApiServer {
