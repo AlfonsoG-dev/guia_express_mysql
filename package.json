@@ -4,7 +4,7 @@
     "description": "",
     "main": "App.js",
     "scripts": {
-        "start": "nodemon --inspect src/App.js"
+        "start": "nodemon --inspect App.js"
     },
     "author": "alfonso gomajoa",
     "license": "ISC",
