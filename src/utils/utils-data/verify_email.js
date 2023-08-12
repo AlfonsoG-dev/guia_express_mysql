@@ -23,6 +23,7 @@ class VerifyEmail {
         return email.replaceAll(/[^a-zA-Z]/g, '')
     }
     is_admin() {
+        //alfonson_admi
         const email_regx = this.clean_simbols().match(/admin/)
         if (email_regx !== null) {
             return true
