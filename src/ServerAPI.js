@@ -6,6 +6,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const cookie_parser = require("cookie-parser");
 const UserRoutes = require("./routes/user_route");
+const AuthMiddleware = require("./middlewares/AutenticateUser")
 const dotenv = require("dotenv");
 dotenv.config();
 class ApiServer {
@@ -13,6 +14,7 @@ class ApiServer {
     constructor() {
         ApiServer.PORT = process.env.NODE_PORT;
         this.user_route = new UserRoutes();
+        this.autenticate_user = new AuthMiddleware();
         this.app = express();
     }
     UseLibrery() {
@@ -42,6 +44,7 @@ class ApiServer {
         this.app.get("/", (req, res) => {
             res.send(req.ip);
         });
+        this.app.post("/", this.autenticate_user.Login.bind(this.autenticate_user))
         this.UseRoutes();
         this.UseErrorMiddleware();
         this.app.listen(ApiServer.PORT, () => {
