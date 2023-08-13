@@ -44,7 +44,7 @@ class UserRepository extends DBConnection {
     }
     autenticate_user({nombre = '', email = '', password = ''}){
         return new Promise((resolve, reject)=>{
-            this.connection.execute('select nombre, email, rol from user where nombre=? and email=? and password=?', [nombre, email, password], function(err,res){
+            this.connection.execute('select nombre, email, rol from `consulta`.user where nombre=? and email=? and password=?', [nombre, email, password], function(err,res){
                 if(err)reject(err)
                 resolve(res)
             })
