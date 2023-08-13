@@ -22,9 +22,6 @@ class ApiServer {
         this.app.use(cookie_parser());
         this.app.use(helmet());
     }
-    UseMiddleware() {
-        //TODO: implementar auth con cookies o session para login y demas
-    }
     UseErrorMiddleware() {
         //manejo de errores 404 o not found
         this.app.use(function (req, res) {
@@ -42,14 +39,14 @@ class ApiServer {
 
     init() {
         this.UseLibrery();
-        this.UseRoutes();
         this.app.get("/", (req, res) => {
             res.send(req.ip);
         });
+        this.UseRoutes();
+        this.UseErrorMiddleware();
         this.app.listen(ApiServer.PORT, () => {
             console.log(`express server in port ${ApiServer.PORT}`);
         });
-        this.UseErrorMiddleware();
     }
 }
 module.exports = ApiServer;

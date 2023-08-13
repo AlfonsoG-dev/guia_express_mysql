@@ -42,6 +42,14 @@ class UserRepository extends DBConnection {
             });
         });
     }
+    autenticate_user({nombre = '', email = '', password = ''}){
+        return new Promise((resolve, reject)=>{
+            this.connection.execute('select nombre, email, rol from user where nombre=? and email=? and password=?', [nombre, email, password], function(err,res){
+                if(err)reject(err)
+                resolve(res)
+            })
+        })
+    }
     read_by_id(user_id = 0) {
         return new Promise((resolve, reject) => {
             this.connection.execute('select email from user where id=?', [user_id], function (err, res) {

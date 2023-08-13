@@ -15,6 +15,7 @@ class User {
         return this.email
     }
     get get_password() {
+        //TODO: hash password 
         return this.password
     }
     get get_rol() {
@@ -33,6 +34,7 @@ class User {
         this.email = nEmail
     }
     set set_password(nPassword = '') {
+        //TODO: apply hasher to password
         this.password = nPassword
     }
     set set_rol(nRol = '') {
