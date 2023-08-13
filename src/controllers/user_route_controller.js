@@ -19,21 +19,6 @@ class UserRouterController {
             });
         }
     }
-
-    async Login(req, res, next){
-        try{
-            const data_req = req.body
-            const data_res = await this.query.autenticate_user(data_req)
-            console.log(data_res)
-            if(data_res.length > 0){
-                next()
-            }else{
-                res.status(400).json({error: "el usuario no esta registrado"})
-            }
-        }catch(error){
-            throw new Error(`${error} en la ruta ${req.url}`)
-        }
-    }
     async list_users(req, res) {
         try {
             const data_res = await this.query.read_all_users();
