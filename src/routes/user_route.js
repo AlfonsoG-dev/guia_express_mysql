@@ -11,7 +11,6 @@ class UserRoutes {
     }
     apply_middleware() {
 
-        // TODO:verificar no funciona
         user_route.use(this.routeController.verificar_integridad_user.bind(this.routeController));
 
     }
