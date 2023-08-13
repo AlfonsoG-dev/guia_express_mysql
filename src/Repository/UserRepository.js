@@ -1,3 +1,4 @@
+const {Console} = require("console");
 const { resolve } = require("path");
 const DBConnection = require("../service/data_base");
 
@@ -8,6 +9,7 @@ class UserRepository extends DBConnection {
     }
 
     verificar_database(db_name = '') {
+        console.log("verificando database")
         return new Promise((resolve, reject) => {
             this.connection.execute(`create database if not exists ${db_name}`, function (err, res) {
                 if (err) reject(err);
@@ -17,6 +19,7 @@ class UserRepository extends DBConnection {
     }
 
     select_database(db_name = '') {
+        console.log("Usando database")
         return new Promise((resolve, reject) => {
             this.connection.query(`use ${db_name}`, function (err, res) {
                 if (err) reject(err);
@@ -26,6 +29,7 @@ class UserRepository extends DBConnection {
     }
 
     verificar_table_user() {
+        console.log("verificando tabla user")
         return new Promise((resolve, reject) => {
             this.connection.execute('create table if not exists user(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), crate_at datetime, update_at datetime)', function (err, res) {
                 if (err) reject(err);
