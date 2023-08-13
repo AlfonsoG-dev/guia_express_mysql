@@ -1,4 +1,4 @@
-const {resolve} = require("path");
+const { resolve } = require("path");
 const DBConnection = require("../service/data_base");
 
 class UserRepository extends DBConnection {
@@ -25,9 +25,9 @@ class UserRepository extends DBConnection {
         });
     }
 
-    verificar_table_user(tb_name = '') {
+    verificar_table_user() {
         return new Promise((resolve, reject) => {
-            this.connection.execute(`create table if not exists ${tb_name}(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), crate_at datetime, update_at datetime)`, function (err, res) {
+            this.connection.execute('create table if not exists user(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), crate_at datetime, update_at datetime)', function (err, res) {
                 if (err) reject(err);
                 resolve(res);
             });
@@ -67,7 +67,7 @@ class UserRepository extends DBConnection {
             });
         });
     }
-    insert_user({nombre = '', email = '', password = '', rol = '', create_at = Date}) {
+    insert_user({ nombre = '', email = '', password = '', rol = '', create_at = Date }) {
         return new Promise((resolve, reject) => {
             this.connection.execute('inert into user (nombre, email, password, rol, create_at) values(?, ?, ?, ?, ?)', [nombre, email, password, rol, create_at], function (err, res) {
                 if (err) reject(err);
@@ -83,7 +83,7 @@ class UserRepository extends DBConnection {
             });
         });
     }
-    update_user({id = 0, nombre = '', email = '', update_at = ''}) {
+    update_user({ id = 0, nombre = '', email = '', update_at = '' }) {
         return new Promise((resolve, reject) => {
             this.connection.execute('update user set nombre = ?, email = ?, update_at = ? where id=?', [nombre, email, update_at, id], function (err, res) {
                 if (err) reject(err);
@@ -91,7 +91,7 @@ class UserRepository extends DBConnection {
             });
         });
     }
-    update_password({id = 0, password = 0, nPassword = 0, rol = ''}) {
+    update_password({ id = 0, password = 0, nPassword = 0, rol = '' }) {
         this.connection.execute('update user set password = ? where password = ? and rol = "admin" and id = ?', [nPassword, password, rol, id], function (err, res) {
             if (err) reject(err);
             resolve(res);
