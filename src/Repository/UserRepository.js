@@ -1,5 +1,3 @@
-const {Console} = require("console");
-const { resolve } = require("path");
 const DBConnection = require("../service/data_base");
 
 class UserRepository extends DBConnection {
