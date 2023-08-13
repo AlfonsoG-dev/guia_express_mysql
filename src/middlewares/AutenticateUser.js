@@ -36,7 +36,7 @@ class AuthMiddleware{
             if(data_req['miApiCookie'] !== undefined){
                 next()
             }else{
-                    throw new Error("usuario no autenticado")
+                res.status().json({error: "usuario no autenticado"})
             }
         }catch(error){
             throw new Error(`${error} in route ${req.url}`)
