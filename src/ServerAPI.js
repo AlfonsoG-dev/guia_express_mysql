@@ -24,13 +24,14 @@ class ApiServer {
         this.app.use(cookie_parser());
         this.app.use(helmet());
     }
+    UseMidleware(){
+        this.app.use(this.autenticate_user.verificar_cookie.bind(this.autenticate_user))
+    }
     UseErrorMiddleware() {
         //manejo de errores 404 o not found
         this.app.use(function (req, res) {
             console.log(req.url);
-            res.status(404).addListener('error', () => {
-                throw new Error("Página no disponible o no encontrada");
-            });
+            res.status(404).json({error: "pagina no encontrada"})
         });
 
     }
@@ -45,6 +46,7 @@ class ApiServer {
             res.send(req.ip);
         });
         this.app.post("/", this.autenticate_user.Login.bind(this.autenticate_user))
+        this.UseMidleware()
         this.UseRoutes();
         this.UseErrorMiddleware();
         this.app.listen(ApiServer.PORT, () => {

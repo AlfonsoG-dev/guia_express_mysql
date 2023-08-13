@@ -14,13 +14,12 @@ class UserRouterController {
             next();
 
         } catch (error) {
-            res.status(400).addListener('error', () => {
-                throw new Error(`${error} en la ruta ${req.url} `);
-            });
+            throw new Error(`${error} en la ruta ${req.url} `);
         }
     }
     async list_users(req, res) {
         try {
+            //console.log(req.cookies)
             const data_res = await this.query.read_all_users();
             if (data_res.length > 0) {
                 res.status(200).json(data_res);
@@ -28,9 +27,7 @@ class UserRouterController {
                 res.status(400).json({ error: 'datos no disponibles' });
             }
         } catch (error) {
-            res.status(400).addListener('error', () => {
-                throw new Error(`${error} en la ruta ${req.url}`);
-            });
+            throw new Error(`${error} en la ruta ${req.url}`);
         }
     }
     async get_user_id(req, res) {
@@ -40,13 +37,10 @@ class UserRouterController {
             if (data_res.length > 0) {
                 res.status(200).json({ exito: data_res[0] });
             } else {
-
                 res.status(400).json({ error: `el usuario con id_: ${req.params.id} no se encuentra` });
             }
         } catch (error) {
-            res.status(400).addListener('error', () => {
-                throw new Error(`${error} en la ruta ${req.url}`);
-            });
+            throw new Error(`${error} en la ruta ${req.url}`);
         }
     }
 
@@ -61,9 +55,7 @@ class UserRouterController {
             }
 
         } catch (error) {
-            res.status(400).addListener('error', () => {
-                throw new Error(`${error} en la ruta ${req.url}`);
-            });
+            throw new Error(`${error} en la ruta ${req.url}`);
         }
     }
     async insert_user(req, res) {
@@ -79,10 +71,7 @@ class UserRouterController {
             }
 
         } catch (error) {
-            res.status(400).addListener('error', () => {
-
-                throw new Error(`${error} en la ruta ${req.url}`);
-            });
+            throw new Error(`${error} en la ruta ${req.url}`);
         }
     }
 
@@ -98,10 +87,7 @@ class UserRouterController {
             }
 
         } catch (error) {
-            res.status(400).addListener('error', () => {
-
-                throw new Error(`${error} en la ruta ${req.url}`);
-            });
+            throw new Error(`${error} en la ruta ${req.url}`);
         }
     }
 }

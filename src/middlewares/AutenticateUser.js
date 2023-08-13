@@ -8,6 +8,7 @@ class AuthMiddleware{
             const data_req = req.body
             const data_res = await this.repository.autenticate_user(data_req)
             if (data_res.length > 0) {
+                res.cookie("miApiCookie", data_res[0])
                 /*                req.session.regenerate(function (err) {
                     if (err) next(err)
                     req.session.user = data_res[0]
@@ -27,6 +28,19 @@ class AuthMiddleware{
             throw new Error(error)
         }
 
+    }
+    verificar_cookie(req, res, next){
+        try{
+            const data_req = req.cookies
+            console.log(data_req['miApiCookie'])
+            if(data_req['miApiCookie'] !== undefined){
+                next()
+            }else{
+                    throw new Error("usuario no autenticado")
+            }
+        }catch(error){
+            throw new Error(`${error} in route ${req.url}`)
+        }
     }
 }
 module.exports = AuthMiddleware;
