@@ -25,7 +25,7 @@ class ApiServer {
         this.app.use(helmet());
     }
     UseMidleware(){
-        //this.app.use(this.autenticate_user.verificar_cookie.bind(this.autenticate_user))
+        this.app.use(this.autenticate_user.verificar_cookie.bind(this.autenticate_user))
     }
     UseErrorMiddleware() {
         //manejo de errores 404 o not found
