@@ -25,12 +25,12 @@ class ApiServer {
         this.app.use(helmet());
     }
     UseMidleware(){
-        this.app.use(this.autenticate_user.verificar_cookie.bind(this.autenticate_user))
+        //this.app.use(this.autenticate_user.verificar_cookie.bind(this.autenticate_user))
     }
     UseErrorMiddleware() {
         //manejo de errores 404 o not found
         this.app.use(function (req, res) {
-            console.log(req.url);
+            //console.log(req.url);
             res.status(404).json({error: "pagina no encontrada"})
         });
 
