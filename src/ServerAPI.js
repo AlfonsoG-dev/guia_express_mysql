@@ -37,15 +37,17 @@ class ApiServer {
     }
 
     UseRoutes() {
+        this.app.get("/", (req, res) => {
+            res.send(req.ip);
+        });
+
+        this.app.post("/", this.autenticate_user.Login.bind(this.autenticate_user))
+
         this.app.use("/user", this.user_route.get_routes());
     }
 
     init() {
         this.UseLibrery();
-        this.app.get("/", (req, res) => {
-            res.send(req.ip);
-        });
-        this.app.post("/", this.autenticate_user.Login.bind(this.autenticate_user))
         this.UseMidleware()
         this.UseRoutes();
         this.UseErrorMiddleware();
