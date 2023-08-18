@@ -10,7 +10,7 @@ class DBConnection {
     create_normal_connecction() {
         return this.mysql.createConnection({
             host: process.env.DB_HOST,
-            user: process.env.DB_USER || 'root',
+            user: process.env.DB_USER || 'test_user',
             password: process.env.DB_PASSWORD,
         });
 
