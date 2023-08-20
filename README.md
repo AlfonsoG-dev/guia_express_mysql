@@ -20,9 +20,11 @@
 >- BD = nombre de la base de datos
 
 # ==EJM==
-NODE_PORT = 3000
-DB_USER = 'test_user'
-DB_HOST = 'localhost'
-DB_PORT = 3306
-DB_PASSWORD = '123'
-BD = "test_db"
+```js
+ NODE_PORT = 3000
+ DB_USER = 'test_user'
+ DB_HOST = 'localhost'
+ DB_PORT = 3306 
+ DB_PASSWORD = '123'
+ BD = "test_db"
+```
